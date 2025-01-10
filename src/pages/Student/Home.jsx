@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourses } from '../../Redux/Student/Action';
 import { toast } from 'react-toastify';
+import CourseDetails from './CourseDetails';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { courses, isLoading, error } = useSelector((state) => state.student);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
     dispatch(getAllCourses());
@@ -16,9 +19,15 @@ const Home = () => {
     try {
       // Implement enrollment logic here
       toast.success('Successfully enrolled in the course!');
+      setShowModal(false);
     } catch (error) {
       toast.error('Failed to enroll in the course');
     }
+  };
+
+  const handleShowDetails = (course) => {
+    setSelectedCourse(course);
+    setShowModal(true);
   };
 
   if (isLoading) {
@@ -52,9 +61,9 @@ const Home = () => {
                   </div>
                   <Button 
                     variant="primary" 
-                    onClick={() => handleEnroll(course._id)}
+                    onClick={() => handleShowDetails(course)}
                   >
-                    Enroll Now
+                    View Details
                   </Button>
                 </div>
               </Card.Body>
@@ -62,6 +71,13 @@ const Home = () => {
           </Col>
         ))}
       </Row>
+
+      <CourseDetails 
+        course={selectedCourse}
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        handleEnroll={handleEnroll}
+      />
     </div>
   );
 };
