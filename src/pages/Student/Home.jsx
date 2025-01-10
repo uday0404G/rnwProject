@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCourses } from '../../Redux/Student/Action';
+import { getAllCourses, enrollInCourse } from '../../Redux/Student/Action';
 import { toast } from 'react-toastify';
 import CourseDetails from './CourseDetails';
 
@@ -17,9 +17,13 @@ const Home = () => {
 
   const handleEnroll = async (courseId) => {
     try {
-      // Implement enrollment logic here
-      toast.success('Successfully enrolled in the course!');
-      setShowModal(false);
+      const result = await dispatch(enrollInCourse(courseId));
+      if (result.success) {
+        toast.success('Successfully enrolled in the course!');
+        setShowModal(false);
+      } else {
+        toast.error(result.error || 'Failed to enroll in the course');
+      }
     } catch (error) {
       toast.error('Failed to enroll in the course');
     }

@@ -3,6 +3,7 @@ import { GET_ALL_COURSES, GET_COURSE_BY_ID, SET_LOADING, SET_ERROR, GET_PROFILE 
 const initialState = {
     courses: [],
     currentCourse: null,
+    enrolledCourses: [],
     isLoading: false,
     error: null,
     profile: null
@@ -20,6 +21,17 @@ const studentReducer = (state = initialState, action) => {
             return { ...state, error: action.payload, isLoading: false };
         case GET_PROFILE:
             return { ...state, profile: action.payload, isLoading: false };
+        case 'ENROLL_COURSE':
+            return { 
+                ...state, 
+                isLoading: false 
+            };
+        case 'GET_ENROLLED_COURSES':
+            return { 
+                ...state, 
+                enrolledCourses: action.payload,
+                isLoading: false 
+            };
         default:
             return state;
     }
