@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UserLogin } from "../Redux/Auth/action";
+
 import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { UserLogin } from "../Redux/Auth/action";
 
 const Login = () => {
   const [formData, setFormData] = useState({

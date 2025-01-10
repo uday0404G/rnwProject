@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'https://rnwprojectbackend.onrender.com';
 
 // Helper function for headers
 const getHeaders = () => ({

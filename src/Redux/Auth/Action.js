@@ -8,7 +8,7 @@ const UserSignup = (user) => (dispatch) => {
   dispatch({ type: SET_LOADING, payload: true });
 
   axios
-    .post("http://localhost:8080/user/register", user)
+    .post("https://rnwprojectbackend.onrender.com/user/register", user)
     .then((res) => {
       dispatch({ type: SET_USER, payload: res.data });
       dispatch({ type: Token, payload: res.data.token });
@@ -41,7 +41,7 @@ const UserLogin = (user) => (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
   
     axios
-      .post("http://localhost:8080/user/login", user)
+      .post("https://rnwprojectbackend.onrender.com/user/login", user)
       .then((res) => {
         dispatch({ type: SET_USER, payload: res.data });
         dispatch({ type: Token, payload: res.data.token });

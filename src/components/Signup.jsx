@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserSignup } from "../Redux/Auth/action";
+
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { UserSignup } from "../Redux/Auth/action";
+
 
 const Signup = () => {
   const [formData, setFormData] = useState({

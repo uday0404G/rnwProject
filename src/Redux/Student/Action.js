@@ -7,7 +7,7 @@ import {jwtDecode} from 'jwt-decode';
 export const getAllCourses = () => async (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     try {
-        const response = await axios.get('http://localhost:8080/courses', {
+        const response = await axios.get('https://rnwprojectbackend.onrender.com/courses', {
             headers: {
                 Authorization: `Bearer ${Cookies.get('token')}`
             }
@@ -22,7 +22,7 @@ export const getAllCourses = () => async (dispatch) => {
 export const getCourseById = (courseId) => async (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     try {
-        const response = await axios.get(`http://localhost:8080/courses/${courseId}`, {
+        const response = await axios.get(`https://rnwprojectbackend.onrender.com/courses/${courseId}`, {
             headers: {
                 Authorization: `Bearer ${Cookies.get('token')}`
             }
