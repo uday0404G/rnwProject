@@ -104,6 +104,11 @@ const Courses = () => {
             }
         }
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="courses-container p-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
@@ -113,6 +118,7 @@ const Courses = () => {
                     Add New Course
                 </Button>
             </div>
+
             <Row xs={1} md={2} lg={3} className="g-4">
                 {courses.map((course) => (
                     <Col key={course._id}>
@@ -138,8 +144,7 @@ const Courses = () => {
                                 </div>
                             </Card.Body>
                             <Card.Footer className="bg-white">
-                                {course.instructor._id === userId ? (
-                                    // Show edit and delete buttons for course creator
+                                {course.instructor && course.instructor._id === userId ? (
                                     <>
                                         <Button 
                                             variant="outline-primary" 
@@ -156,7 +161,6 @@ const Courses = () => {
                                         </Button>
                                     </>
                                 ) : (
-                                    // Show view button for other teachers
                                     <Button 
                                         variant="outline-info" 
                                         onClick={() => handleView(course)}
@@ -169,6 +173,7 @@ const Courses = () => {
                     </Col>
                 ))}
             </Row>
+
             {/* Add/Edit Course Modal */}
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -253,7 +258,7 @@ const Courses = () => {
                             <div className="mt-3">
                                 <p><strong>Duration:</strong> {viewCourse.duration}</p>
                                 <p><strong>Level:</strong> {viewCourse.level}</p>
-                                <p><strong>Instructor:</strong> {viewCourse.instructor.name}</p>
+                                <p><strong>Instructor:</strong> {viewCourse.instructor?.name}</p>
                                 <p><strong>Enrolled Students:</strong> {viewCourse.enrolledStudents?.length || 0}</p>
                             </div>
                         </div>
