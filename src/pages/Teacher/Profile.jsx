@@ -33,7 +33,7 @@ const TeacherProfile = () => {
   const fetchProfileData = async () => {
     try {
       const token = Cookies.get('token');
-      const response = await axios.get(`https://rnwprojectbackend.onrender.com/user/profile`, {
+      const response = await axios.get(`http://localhost:8080/user/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -57,7 +57,7 @@ const TeacherProfile = () => {
     e.preventDefault();
     try {
       const token = Cookies.get('token');
-      await axios.put(`https://rnwprojectbackend.onrender.com/user/profile`, formData, {
+      await axios.put(`http://localhost:8080/user/profile`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Profile updated successfully');
@@ -76,7 +76,7 @@ const TeacherProfile = () => {
     }
     try {
       const token = Cookies.get('token');
-      await axios.put(`https://rnwprojectbackend.onrender.com/user/change-password`, {
+      await axios.put(`http://localhost:8080/user/change-password`, {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       }, {
