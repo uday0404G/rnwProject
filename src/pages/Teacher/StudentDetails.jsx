@@ -102,14 +102,39 @@ const StudentDetails = () => {
                 <Row xs={1} md={2} className="g-4">
                   {student.enrolledCourses.map(course => (
                     <Col key={course._id}>
-                      <Card>
+                      <Card className="h-100">
+                        <Card.Img 
+                          variant="top" 
+                          src={course.image || 'https://via.placeholder.com/300x200'} 
+                          alt={course.title}
+                          style={{ height: '160px', objectFit: 'cover' }}
+                        />
                         <Card.Body>
                           <Card.Title>{course.title}</Card.Title>
-                          <Card.Text>{course.description}</Card.Text>
-                          <div className="mt-2">
-                            <small className="text-muted">
-                              <strong>Progress:</strong> {course.progress || 0}%
+                          <Card.Text className="text-muted">
+                            {course.description?.length > 100 
+                              ? `${course.description.substring(0, 100)}...` 
+                              : course.description}
+                          </Card.Text>
+                          <div className="mt-3">
+                            <small className="text-muted d-block mb-2">
+                              <strong>Progress:</strong>
                             </small>
+                            <div className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{ 
+                                  width: `${course.progress || 0}%`,
+                                  backgroundColor: '#007bff'
+                                }}
+                                aria-valuenow={course.progress || 0}
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                              >
+                                {course.progress || 0}%
+                              </div>
+                            </div>
                           </div>
                         </Card.Body>
                       </Card>
