@@ -19,7 +19,7 @@ const MainRoute = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/" element={<Signup />} />
       <Route element={<PrivateRoute />}>
         <Route path="/student-dashboard" element={<StudentLayout />}>
           <Route index element={<Home />} />

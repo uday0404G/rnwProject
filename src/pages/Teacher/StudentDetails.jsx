@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Row, Col, Badge, ListGroup, Button, Spinner } from 'react-bootstrap';
+import { Card, Row, Col, Badge, Button, Spinner } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaBook, FaArrowLeft } from 'react-icons/fa';
 import axios from 'axios';
@@ -19,15 +19,13 @@ const StudentDetails = () => {
   const fetchStudentDetails = async () => {
     try {
       const token = Cookies.get('token');
-      const response = await axios.get(`http://localhost:8080/user/student/${studentId}`, {
+      const response = await axios.get(`https://rnwprojectbackend.onrender.com/user/student/${studentId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('Student data:', response.data); // For debugging
       setStudent(response.data);
     } catch (error) {
-      console.error('Error fetching student details:', error);
       toast.error(error.response?.data?.message || 'Failed to fetch student details');
     } finally {
       setLoading(false);
@@ -88,31 +86,7 @@ const StudentDetails = () => {
                 <FaEnvelope className="me-2" />
                 {student.email}
               </p>
-              <Badge bg={student.status === 'active' ? 'success' : 'warning'}>
-                {student.status || 'Active'}
-              </Badge>
-            </Card.Body>
-          </Card>
-
-          <Card>
-            <Card.Body>
-              <h5 className="mb-3">Student Information</h5>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <strong>Joined Date:</strong>{' '}
-                  {new Date(student.createdAt).toLocaleDateString()}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>Total Courses:</strong>{' '}
-                  {student.enrolledCourses?.length || 0}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>Status:</strong>{' '}
-                  <Badge bg={student.status === 'active' ? 'success' : 'warning'}>
-                    {student.status || 'Active'}
-                  </Badge>
-                </ListGroup.Item>
-              </ListGroup>
+              <Badge bg="success">Active</Badge>
             </Card.Body>
           </Card>
         </Col>
@@ -129,22 +103,28 @@ const StudentDetails = () => {
                         <Card.Img 
                           variant="top" 
                           src={course.image || 'https://via.placeholder.com/300x200'} 
-                          style={{ height: '150px', objectFit: 'cover' }}
+                          alt={course.title}
+                          style={{ height: '160px', objectFit: 'cover' }}
                         />
                         <Card.Body>
                           <Card.Title>{course.title}</Card.Title>
-                          <Card.Text className="text-muted small">
-                            {course.description}
+                          <Card.Text className="text-muted">
+                            {course.description?.length > 100 
+                              ? `${course.description.substring(0, 100)}...` 
+                              : course.description}
                           </Card.Text>
-                          <div className="mt-2">
-                            <small className="text-muted">
+                          <div className="mt-3">
+                            <small className="text-muted d-block mb-2">
                               <strong>Progress:</strong>
                             </small>
-                            <div className="progress mt-1">
+                            <div className="progress">
                               <div
                                 className="progress-bar"
                                 role="progressbar"
-                                style={{ width: `${course.progress || 0}%` }}
+                                style={{ 
+                                  width: `${course.progress || 0}%`,
+                                  backgroundColor: '#007bff'
+                                }}
                                 aria-valuenow={course.progress || 0}
                                 aria-valuemin="0"
                                 aria-valuemax="100"

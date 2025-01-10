@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { UserLogin } from "../Redux/Auth/action";
+import { UserLogin } from "../Redux/Auth/Action";
 
 
 const Login = () => {

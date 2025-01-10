@@ -61,7 +61,7 @@ export const enrollInCourse = (courseId) => async (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     try {
         const response = await axios.post(
-            `http://localhost:8080/enrollment/enroll/${courseId}`,
+            `https://rnwprojectbackend.onrender.com/enrollment/enroll/${courseId}`,
             {},
             {
                 headers: {
@@ -82,7 +82,7 @@ export const getEnrolledCourses = () => async (dispatch) => {
     dispatch({ type: SET_LOADING, payload: true });
     try {
         const response = await axios.get(
-            'http://localhost:8080/enrollment/my-courses',
+            'https://rnwprojectbackend.onrender.com/enrollment/my-courses',
             {
                 headers: {
                     Authorization: `Bearer ${Cookies.get('token')}`
