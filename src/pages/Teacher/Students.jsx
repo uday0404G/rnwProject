@@ -27,7 +27,7 @@ const Students = () => {
   ) || [];
 
   const handleViewDetails = (userId, role) => {
-    console.log('Viewing details for:', { userId, role }); // Debug log
+    console.log('Viewing details for:', { userId, role }); 
     navigate(`/teacher-dashboard/${role}s/${userId}`);
   };
 
