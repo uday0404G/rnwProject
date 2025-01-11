@@ -23,10 +23,10 @@ const TeacherDetails = () => {
       console.log('Fetching teacher details for ID:', teacherId); // Debug log
 
       const [teacherResponse, coursesResponse] = await Promise.all([
-        axios.get(`http://localhost:8080/user/teacher/${teacherId}`, {
+        axios.get(`https://rnwprojectbackend.onrender.com/user/teacher/${teacherId}`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get(`http://localhost:8080/courses/teacher/${teacherId}`, {
+        axios.get(`https://rnwprojectbackend.onrender.com/courses/teacher/${teacherId}`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
